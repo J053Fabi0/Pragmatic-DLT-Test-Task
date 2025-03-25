@@ -5,6 +5,7 @@ export interface TransactionBase {
   date: Date;
   pending: boolean;
   image: string;
+  id: string;
 }
 
 export interface TransactionCredit extends TransactionBase {

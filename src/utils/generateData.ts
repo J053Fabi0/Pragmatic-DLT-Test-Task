@@ -13,6 +13,7 @@ export default function generateTransactions(howMany: number): Transaction[] {
     const anotherPerson = faker.person.fullName();
 
     const transactionBase: TransactionBase = {
+      id: faker.string.uuid(),
       description: faker.lorem.sentence(),
       amount: faker.number.int({ min: 1, max: 1000 }),
       date: startingDate.toDate(),
