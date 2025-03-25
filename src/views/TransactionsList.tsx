@@ -24,7 +24,7 @@ export default function TransactionsList() {
     }
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-200 px-4 py-24 dark:bg-gray-900">
+    <>
       <div className="absolute top-4 right-4">
         <DarkThemeToggle />
       </div>
@@ -82,7 +82,7 @@ export default function TransactionsList() {
             <ListItem className="pt-3 pb-3 sm:pt-4">
               {transactions.map((t, i) => (
                 <Link
-                  to={`/transaction/${t.id}`}
+                  to={`/transactions/${t.id}`}
                   key={t.id}
                   className="cursor-pointer"
                 >
@@ -119,6 +119,6 @@ export default function TransactionsList() {
           </List>
         </div>
       </div>
-    </main>
+    </>
   );
 }
