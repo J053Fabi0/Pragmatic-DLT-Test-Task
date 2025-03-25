@@ -1,13 +1,14 @@
 import moment from "moment";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import Transactions from "../components/Transactions";
 import { Card, DarkThemeToggle } from "flowbite-react";
 import numberWithCommas from "../utils/numberWithCommas";
-import { BalanceContext } from "../context/BalanceContext";
+import { BalanceContext, CardLimitContext } from "../context/BalanceContext";
 
 export default function TransactionsList() {
-  const [cardLimit] = useState(1500);
   const balance = useContext(BalanceContext);
+  const cardLimit = useContext(CardLimitContext);
+
   const availableBalance = cardLimit - balance;
 
   const nameOfMonth = useRef<string>("");
