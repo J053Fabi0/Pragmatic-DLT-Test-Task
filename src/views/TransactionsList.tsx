@@ -3,11 +3,14 @@ import { useContext, useRef } from "react";
 import Transactions from "../components/Transactions";
 import { Card, DarkThemeToggle } from "flowbite-react";
 import numberWithCommas from "../utils/numberWithCommas";
+import formatDailyPoints from "../utils/formatDailyPoints";
+import { DailyPointsContext } from "../context/DailyPoints";
 import { BalanceContext, CardLimitContext } from "../context/BalanceContext";
 
 export default function TransactionsList() {
   const balance = useContext(BalanceContext);
   const cardLimit = useContext(CardLimitContext);
+  const dailyPoints = useContext(DailyPointsContext);
 
   const availableBalance = cardLimit - balance;
 
@@ -44,7 +47,7 @@ export default function TransactionsList() {
                     Daily points
                   </p>
                   <p className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    434k
+                    {formatDailyPoints(dailyPoints)}
                   </p>
                 </div>
               </Card>
