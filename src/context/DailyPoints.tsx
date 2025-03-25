@@ -1,16 +1,8 @@
 import moment from "moment";
 import type { Moment } from "moment";
+import getIsNthOfSeason from "../utils/getIsNthOfSeason";
 import { useContext, useEffect, useState } from "react";
 import { DailyPointsContext, TransactionsContext } from "./contexts";
-
-function getIsNthOfSeason(date: Moment, nth: number): boolean {
-  const day = date.format("DD");
-  if (nth.toString().padStart(2, "0") !== day) return false;
-
-  const month = date.format("MM");
-  // march, june, september, december
-  return month === "03" || month === "06" || month === "09" || month === "12";
-}
 
 function getDailyPoints(from: Moment, to?: Moment): number {
   from = from.startOf("day");
@@ -19,7 +11,7 @@ function getDailyPoints(from: Moment, to?: Moment): number {
   const date = from.clone();
 
   const points: number[] = [];
-  do {
+  while (date.isBefore(to)) {
     if (getIsNthOfSeason(date, 1)) points.push(2);
     else if (getIsNthOfSeason(date, 2)) points.push(3);
     else {
@@ -31,7 +23,8 @@ function getDailyPoints(from: Moment, to?: Moment): number {
       if (i - 2 >= 0) point += points[i - 2];
       points.push(point);
     }
-  } while (date.isBefore(to) && (date.add(1, "day"), true));
+    date.add(1, "day");
+  }
 
   let total = 0;
   for (const point of points) total += point;
