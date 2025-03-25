@@ -1,11 +1,30 @@
+import moment from "moment";
 import { List } from "flowbite-react";
 import { Avatar } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { ListItem } from "flowbite-react";
 import { useContext, useRef } from "react";
 import numberWithCommas from "../utils/numberWithCommas";
+import type Transaction from "../types/transaction.type";
 import { TransactionsContext } from "../context/TransactionsContext";
-import getTransactionDescription from "../utils/getTransactionDescription";
+
+function getTransactionDescription(transaction: Transaction): [string, string] {
+  const description: [string, string] = ["", ""];
+
+  const date = moment(transaction.date).isSame(moment(), "week")
+    ? moment(transaction.date).format("dddd")
+    : moment(transaction.date).format("DD/MM/YYYY");
+
+  if (transaction.pending) description[0] += `Pending - `;
+
+  description[0] += transaction.description;
+
+  if (transaction.anotherPerson)
+    description[1] += `${transaction.anotherPerson} - `;
+  description[1] += date;
+
+  return description;
+}
 
 export default function Transactions() {
   const transactions = useContext(TransactionsContext);
