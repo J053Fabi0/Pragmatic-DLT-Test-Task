@@ -1,15 +1,15 @@
+import {
+  List,
+  Avatar,
+  ListItem,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "flowbite-react";
 import moment from "moment";
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { TransactionsContext } from "../context/TransactionsContext";
-import {
-  Avatar,
-  Breadcrumb,
-  BreadcrumbItem,
-  List,
-  ListItem,
-} from "flowbite-react";
 import numberWithCommas from "../utils/numberWithCommas";
+import { TransactionsContext } from "../context/TransactionsContext";
 
 export default function TransactionDetail() {
   const { id } = useParams();
@@ -33,14 +33,18 @@ export default function TransactionDetail() {
     ? moment(transaction.date).format("dddd, HH:mm")
     : moment(transaction.date).format("DD/MM/YYYY, HH:mm");
 
+  const name = transaction.name === null ? "Payment" : transaction.name;
+
   return (
     <div className="flex flex-col items-center gap-4">
       <Breadcrumb className="mb-4 w-full">
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href="/transactions">Transactions</BreadcrumbItem>
         <BreadcrumbItem>
-          {transaction.name === null ? "Payment" : transaction.name}
+          <Link to="/">Home</Link>
         </BreadcrumbItem>
+        <BreadcrumbItem>
+          <Link to="/transactions">Transactions</Link>
+        </BreadcrumbItem>
+        <BreadcrumbItem>{name}</BreadcrumbItem>
       </Breadcrumb>
 
       <div className="flex flex-col items-center gap-4">
@@ -55,25 +59,20 @@ export default function TransactionDetail() {
 
       <List
         unstyled
-        className="divide-y divide-gray-200 rounded-lg bg-white px-5 dark:divide-gray-700 dark:bg-gray-800"
+        className="w-full divide-y divide-gray-200 rounded-lg bg-white px-5 dark:divide-gray-700 dark:bg-gray-800"
       >
         <ListItem className="pt-3 pb-3">
           <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse">
-            <Avatar
-              size="md"
-              img={transaction.image}
-              alt={transaction.name === null ? "Payment" : transaction.name}
-            />
-            <div className="min-w-0 flex-1">
-              <div className="flex justify-between">
-                <p className="truncate text-base font-semibold text-gray-900 dark:text-white">
-                  {transaction.name === null ? "Payment" : transaction.name}
-                </p>
+            <Avatar size="md" img={transaction.image} alt={name} />
+            {
+              <div className="min-w-0 flex-1">
+                <div className="flex justify-between">
+                  <p className="truncate text-base font-semibold text-gray-900 dark:text-white">
+                    {transaction.anotherPerson ?? "By you"}
+                  </p>
+                </div>
               </div>
-            </div>
-            {/* <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-              {date}
-            </p> */}
+            }
           </div>
         </ListItem>
         <ListItem className="pt-3 pb-3">
@@ -82,7 +81,7 @@ export default function TransactionDetail() {
           </p>
         </ListItem>
         <ListItem className="pt-3 pb-3">
-          <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             {transaction.description}
           </p>
         </ListItem>
