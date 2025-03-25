@@ -1,7 +1,7 @@
 import TransactionsList from "./views/TransactionsList";
 import TransactionDetail from "./views/TransactionDetail";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { BalanceProvider } from "./context/BalanceContext";
+import BalanceProvider from "./context/BalanceContext";
 import { DailyPointsProvider } from "./context/DailyPoints";
 import { TransactionsProvider } from "./context/TransactionsContext";
 

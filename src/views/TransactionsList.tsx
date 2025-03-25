@@ -1,11 +1,14 @@
+import {
+  BalanceContext,
+  CardLimitContext,
+  DailyPointsContext,
+} from "../context/contexts";
 import moment from "moment";
 import { useContext, useRef } from "react";
 import Transactions from "../components/Transactions";
 import { Card, DarkThemeToggle } from "flowbite-react";
 import numberWithCommas from "../utils/numberWithCommas";
 import formatDailyPoints from "../utils/formatDailyPoints";
-import { DailyPointsContext } from "../context/DailyPoints";
-import { BalanceContext, CardLimitContext } from "../context/BalanceContext";
 
 export default function TransactionsList() {
   const balance = useContext(BalanceContext);

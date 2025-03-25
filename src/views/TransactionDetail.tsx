@@ -9,7 +9,7 @@ import moment from "moment";
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import numberWithCommas from "../utils/numberWithCommas";
-import { TransactionsContext } from "../context/TransactionsContext";
+import { TransactionsContext } from "../context/contexts";
 
 export default function TransactionDetail() {
   const { id } = useParams();

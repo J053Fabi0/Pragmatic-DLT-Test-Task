@@ -1,11 +1,7 @@
+import { useEffect, useState } from "react";
 import type Transaction from "../types/transaction.type";
 import generateTransactions from "../utils/generateData";
-import { createContext, useEffect, useState } from "react";
-
-export const TransactionsContext = createContext<Transaction[]>([]);
-export const TransactionsContextUpdate = createContext<React.Dispatch<
-  React.SetStateAction<Transaction[]>
-> | null>(null);
+import { TransactionsContext, TransactionsContextUpdate } from "./contexts";
 
 export function TransactionsProvider({
   children,

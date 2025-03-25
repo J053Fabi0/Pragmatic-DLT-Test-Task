@@ -6,7 +6,7 @@ import { ListItem } from "flowbite-react";
 import { useContext, useRef } from "react";
 import numberWithCommas from "../utils/numberWithCommas";
 import type Transaction from "../types/transaction.type";
-import { TransactionsContext } from "../context/TransactionsContext";
+import { TransactionsContext } from "../context/contexts";
 
 function getTransactionDescription(transaction: Transaction): [string, string] {
   const description: [string, string] = ["", ""];

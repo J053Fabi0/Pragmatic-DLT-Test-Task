@@ -1,16 +1,17 @@
+import {
+  BalanceContext,
+  CardLimitContext,
+  BalanceContextUpdate,
+  CardLimitContextUpdate,
+} from "./contexts";
 import _ from "lodash";
-import { createContext, useState } from "react";
+import { useState } from "react";
 
-export const BalanceContext = createContext<number>(0);
-export const BalanceContextUpdate = createContext<React.Dispatch<
-  React.SetStateAction<number>
-> | null>(null);
-export const CardLimitContext = createContext<number>(0);
-export const CardLimitContextUpdate = createContext<React.Dispatch<
-  React.SetStateAction<number>
-> | null>(null);
-
-export function BalanceProvider({ children }: { children: React.ReactNode }) {
+export default function BalanceProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [balance, setBalance] = useState<number>(_.random(10, 300, true));
   const [cardLimit, setCardLimit] = useState<number>(1500);
 
